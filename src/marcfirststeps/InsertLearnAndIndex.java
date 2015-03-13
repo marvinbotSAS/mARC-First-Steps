@@ -26,23 +26,9 @@ public class InsertLearnAndIndex {
      * @param colnames  fields of the table where to insert data
      * @param values     the data. length of this string array mus be at least linesYoInsert.
      */
-    public static void main(String ip,String port, String linesToInsert,String[] colnames, String[] values ) 
+    public static void main(Connector connector, String linesToInsert,String[] colnames, String[] values ) 
     {
-        
-
-        Connector connector = new Connector();
- 
-        if ( ip == null && port == null )
-        {       // instantiate a server
-                // STEP #0 connect to the server
-               ConnectToAmARCServer.doIt(connector, "127.0.0.1", "1254");
-        }
-        else
-        {
-            ConnectToAmARCServer.doIt(connector, ip, port);
-        }
-
-        // STEP #2 Insert Learn and Index random data
+       // STEP #2 Insert Learn and Index random data
        String[] shapes = null;
        String[] activities = null;
        String title = null;

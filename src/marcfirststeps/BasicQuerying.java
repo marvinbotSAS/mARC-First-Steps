@@ -18,15 +18,8 @@ public class BasicQuerying {
      * @param query query
      * @param results OUT : results as a 2D array
      */
-    static public void main(String ip, String port, String[] format, String query, String[][] results)
+    static public void main(Connector connector, String[] format, String query, String[][] results)
     {
-         // instantiate a server
-        Connector connector = new Connector();
-        
-         // STEP #0 connect to the server
-        ConnectToAmARCServer.doIt(connector, "127.0.0.1", "1254");
-        
-        
          // STEP #3 : basic querying
         if ( format == null )
         {

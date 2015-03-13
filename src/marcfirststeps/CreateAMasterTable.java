@@ -18,16 +18,13 @@ public class CreateAMasterTable {
      * @param tableName name of the table
      * @param structure its structure
      */
-    static public void main(String tableName, String structure)
+    static public void main(Connector connector, String tableName, String structure)
     {
  
         if ( tableName == null || tableName.isEmpty())
         {
             tableName = tableName = "myName";
         }
-        Connector connector = new Connector();
-        // STEP #0 connect to the server
-        ConnectToAmARCServer.doIt(connector, "127.0.0.1", "1254");
         // STEP #1 create the master table
         if ( structure == null || structure.isEmpty())
         {
