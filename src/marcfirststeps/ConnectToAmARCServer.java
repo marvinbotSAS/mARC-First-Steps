@@ -19,8 +19,8 @@ public class ConnectToAmARCServer {
      */
     static public void doIt(Connector connector, String ip, String port)
     {
-        connector.setIp("127.0.0.1");
-        connector.setPort("1254");
+        connector.setIp(ip);
+        connector.setPort(port);
         // connect to the server
         try
         {
