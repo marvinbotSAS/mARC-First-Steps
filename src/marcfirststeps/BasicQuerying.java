@@ -34,7 +34,7 @@ public class BasicQuerying {
             connector.executeScript(); // execute script on mARC server side
             String[] doc_numbers = connector. getDataByName("count",3);
             int doc_number = Integer.parseInt(doc_numbers[0]); // the number of retrieved docs
-            String[] fields = new String[]{"title","text"}; // the fields to retrieve
+            String[] fields = format; // the fields to retrieve
             results = new String[2][doc_number]; // 2D array containing the results for each field format
             // we retrieve the data for each field format inside the 2D array
             int i = 0;
