@@ -26,8 +26,12 @@ public class InsertLearnAndIndex {
      * @param colnames  fields of the table where to insert data
      * @param values     the data. length of this string array mus be at least linesYoInsert.
      */
-    public static void main(Connector connector, String linesToInsert,String[] colnames, String[] values ) 
+    public static void main(Connector connector, String tableName, String linesToInsert,String[] colnames, String[] values ) 
     {
+        if (tableName == null || tableName.isEmpty() )
+        {
+            tableName = "myTable";
+        }
        // STEP #2 Insert Learn and Index random data
        String[] shapes = null;
        String[] activities = null;
@@ -51,7 +55,8 @@ public class InsertLearnAndIndex {
        }
        if ( !isRandom && values.length < Integer.parseInt(linesToInsert ) )
        {
-            System.out.println("data must be at least size of "+linesToInsert);
+            System.out.println("ERROR. Aborting. data must be at least size of "+linesToInsert);
+            return;
        }
        
        for (int  i= 0; i < numberOfLines ;i ++)
@@ -64,7 +69,7 @@ public class InsertLearnAndIndex {
                text = new BigInteger(130, random).toString(32);
                values = new String[]{title, text}; // the data to insert
            }
-           InsertLearnAndIndex.doIt(connector,"myTable", cols, values,shapes, activities );
+           InsertLearnAndIndex.doIt(connector,tableName, cols, values,shapes, activities );
            System.out.println("indexation data for line #"+i+":");
            int j = 0;
            for ( String s : shapes)
