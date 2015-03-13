@@ -11,6 +11,26 @@ import mARC.Connector;
  */
 public class PureLearning {
     
+    public static void main()
+    {
+        Connector connector = new Connector();
+
+        // connect to the server
+        ConnectToAmARCServer.doIt(connector, "127.0.0.1", "1254");
+        String signal = "the text to learn";
+        String[] shapes =null ;
+        String[] activities = null;
+        PureLearning.main(connector, null, shapes, activities);
+        if ( shapes != null )
+        {
+            System.out.println("indexation result :");
+            int i = 0;
+            for ( String s : shapes)
+            {
+                System.out.println(s+" : "+activities[i++]);
+            }
+        }
+    }
     /**
      *  
      * @param connector  the server

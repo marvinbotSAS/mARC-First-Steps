@@ -13,6 +13,16 @@ import mARC.Connector;
 
 public class CreateAMasterTable {
 
+    static public void main()
+    {
+        Connector connector = new Connector();
+
+        // connect to the server
+        ConnectToAmARCServer.doIt(connector, "127.0.0.1", "1254");
+        String tableName = "myName";
+        String structure = "title CHAR 254, text STRING";
+        CreateAMasterTable.main(connector,tableName,structure);
+    }
     /**
      * @param connector the server
      * @param tableName name of the table
