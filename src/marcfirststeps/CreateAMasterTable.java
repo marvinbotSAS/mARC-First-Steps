@@ -14,7 +14,7 @@ import mARC.Connector;
 public class CreateAMasterTable {
 
     /**
-     * 
+     * @param connector the server
      * @param tableName name of the table
      * @param structure its structure
      */

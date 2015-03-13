@@ -14,14 +14,25 @@ import mARC.Connector;
 
 public class InsertLearnAndIndex {
     
+    public static void main()
+    {
+        Connector connector = new Connector();
+
+        // connect to the server
+        ConnectToAmARCServer.doIt(connector, "127.0.0.1", "1254");
+        String tableName = "myName";
+        String linesToInsert = "10000";
+        String[] fields = new String[]{"title","text"};
+        String query = "orange agent Vietnam";
+        String[][] results = null;
+        InsertLearnAndIndex.main(connector,tableName,linesToInsert,fields,null );
+    }
     /**
      * run a script to insert, learn and index
      * array 'values' must have linesToInsert lines at least
-     */
-    /**
      * 
-     * @param ip server ip
-     * @param port server port
+     * @param connector  the server
+       @param tableName  name of the master table
      * @param linesToInsert  number of lines to insert
      * @param colnames  fields of the table where to insert data
      * @param values     the data. length of this string array mus be at least linesYoInsert.

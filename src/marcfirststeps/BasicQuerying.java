@@ -11,24 +11,60 @@ import mARC.Connector;
  */
 public class BasicQuerying {
     
+    static public void main()
+    {
+        Connector connector = new Connector();
+
+        // connect to the server
+        ConnectToAmARCServer.doIt(connector, "127.0.0.1", "1254");
+        String[] fields = new String[]{"title","text"};
+        String query = "orange agent Vietnam";
+        String[][] results = null;
+        BasicQuerying.main(connector, fields, query, results);
+        
+        String header = fields[0];
+        for (int i = 1 ; i < fields.length;i++ )
+        {
+            header +=  " | " + fields[i];
+        }
+        System.out.println(header);
+        int lineNumbers = results[0].length;
+        
+        for ( int col = 0; col < lineNumbers;col++)
+        {
+            String line = "";
+            for (int i = 0; i < results.length ; i++)
+            {
+                line += results[i][col]+ " | ";
+            }
+            System.out.println(line);
+        }
+
+    }
     /**
      * 
-     * @param ip server ip
-     * @param port  server port
+     * @param connector  the server 
+     * @param fields  format for the output according to the master table fields
      * @param query query
      * @param results OUT : results as a 2D array
      */
-    static public void main(Connector connector, String[] format, String query, String[][] results)
+    static public void main(Connector connector, String[] fields, String query, String[][] results)
     {
          // STEP #3 : basic querying
-        if ( format == null )
+        if ( fields == null )
         {
-            format = new String[]{"format = title text"};
+            fields = new String[]{"title", "text"};
         } // the format to show the results
         if ( query == null || query.isEmpty())
         {
             query = "orange agent Vietnam";
         }
+        String f = "format = ";
+        for (String s: fields)
+        {
+            f += s+" ";
+        }
+        String[] format = new String[]{f};
         BasicQuerying.doIt(connector, query, format, results);
     }
         
@@ -57,7 +93,7 @@ public class BasicQuerying {
             String[] doc_numbers = connector. getDataByName("count",3);
             int doc_number = Integer.parseInt(doc_numbers[0]); // the number of retrieved docs
             String[] fields = format; // the fields to retrieve
-            results = new String[2][doc_number]; // 2D array containing the results for each field format
+            results = new String[fields.length][doc_number]; // 2D array containing the results for each field format
             // we retrieve the data for each field format inside the 2D array
             int i = 0;
             for (String s : fields)
