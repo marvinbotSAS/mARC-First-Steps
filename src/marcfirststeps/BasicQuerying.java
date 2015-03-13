@@ -13,6 +13,35 @@ public class BasicQuerying {
     
     /**
      * 
+     * @param ip server ip
+     * @param port  server port
+     * @param query query
+     * @param results OUT : results as a 2D array
+     */
+    static public void main(String ip, String port, String[] format, String query, String[][] results)
+    {
+         // instantiate a server
+        Connector connector = new Connector();
+        
+         // STEP #0 connect to the server
+        ConnectToAmARCServer.doIt(connector, "127.0.0.1", "1254");
+        
+        
+         // STEP #3 : basic querying
+        if ( format == null )
+        {
+            format = new String[]{"format = title text"};
+        } // the format to show the results
+        if ( query == null || query.isEmpty())
+        {
+            query = "orange agent Vietnam";
+        }
+        BasicQuerying.doIt(connector, query, format, results);
+    }
+        
+
+    /**
+     * 
      * @param connector IN : the server
      * @param query     IN : the query
      * @param format    IN : the output format of the results according to the master table fields

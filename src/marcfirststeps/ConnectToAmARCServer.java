@@ -11,6 +11,20 @@ import mARC.Connector;
  */
 public class ConnectToAmARCServer {
     
+     static public void main(String ip, String port)
+     {
+         if ( ip == null || ip.isEmpty())
+         {
+              ip = "127.0.0.1";
+         }
+         if ( port == null || port.isEmpty())
+         {
+             port = "1254";
+         }
+         Connector connector = new Connector();
+        // STEP #0 connect to the server
+        ConnectToAmARCServer.doIt(connector,ip, port);
+     }
     /**
      * 
      * @param connector  the server

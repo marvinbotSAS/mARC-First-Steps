@@ -11,6 +11,13 @@ import mARC.Connector;
  */
 public class PureLearning {
     
+    
+    public static void main(Connector connector, String signal ,String[] shapes, String[] activities ) 
+    {
+        PureLearning.doIt(connector, signal, shapes, activities);
+    }
+    
+    
     /**
      * 
      * @param connector  IN  : the server

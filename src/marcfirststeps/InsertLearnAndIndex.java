@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 package marcfirststeps;
+import java.math.BigInteger;
+import java.security.SecureRandom;
 import mARC.Connector;
 /**
  *
@@ -12,6 +14,81 @@ import mARC.Connector;
 
 public class InsertLearnAndIndex {
     
+    /**
+     * run a script to insert, learn and index
+     * array 'values' must have linesToInsert lines at least
+     */
+    /**
+     * 
+     * @param ip server ip
+     * @param port server port
+     * @param linesToInsert  number of lines to insert
+     * @param colnames  fields of the table where to insert data
+     * @param values     the data. length of this string array mus be at least linesYoInsert.
+     */
+    public static void main(String ip,String port, String linesToInsert,String[] colnames, String[] values ) 
+    {
+        
+
+        Connector connector = new Connector();
+ 
+        if ( ip == null && port == null )
+        {       // instantiate a server
+                // STEP #0 connect to the server
+               ConnectToAmARCServer.doIt(connector, "127.0.0.1", "1254");
+        }
+        else
+        {
+            ConnectToAmARCServer.doIt(connector, ip, port);
+        }
+
+        // STEP #2 Insert Learn and Index random data
+       String[] shapes = null;
+       String[] activities = null;
+       String title = null;
+       String text = null;
+       SecureRandom random = null;
+       int numberOfLines = 10000;
+       if ( linesToInsert != null )
+       {
+           numberOfLines = Integer.parseInt(linesToInsert);
+       }
+       String[] cols = new String[]{"title","text"};
+       if ( colnames !=null)
+       {
+           cols = colnames;
+       }
+       boolean  isRandom = false;
+       if ( values == null )
+       {
+           isRandom = true;
+       }
+       if ( !isRandom && values.length < Integer.parseInt(linesToInsert ) )
+       {
+            System.out.println("data must be at least size of "+linesToInsert);
+       }
+       
+       for (int  i= 0; i < numberOfLines ;i ++)
+       {
+           if ( isRandom )
+           {
+               random = new SecureRandom();
+               title = new BigInteger(130, random).toString(32);
+               random = new SecureRandom();
+               text = new BigInteger(130, random).toString(32);
+               values = new String[]{title, text}; // the data to insert
+           }
+           InsertLearnAndIndex.doIt(connector,"myTable", cols, values,shapes, activities );
+           System.out.println("indexation data for line #"+i+":");
+           int j = 0;
+           for ( String s : shapes)
+           {
+               System.out.println("shape :"+s+": "+activities[j++]);
+           }
+       }
+        
+        
+    }
     /**
      * 
      * @param connector
