@@ -33,6 +33,7 @@ public class PureLearning {
         }
         catch(Exception e)
         {
+            System.out.println(e.getMessage());
             if ( connector.result.mError )
             {
                 System.out.println("mARC error occured : "+connector.getExecutionErrorMsg());
