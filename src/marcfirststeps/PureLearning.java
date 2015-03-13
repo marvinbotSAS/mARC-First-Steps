@@ -20,14 +20,23 @@ public class PureLearning {
      */
     static public void doIt(Connector connector,String signal, String[] shapes, String[] activities)
     {
-        connector.directExecute = false; // script mode
-        connector.openScript(null); // script starts after this line
-        connector.SESSION_Store(signal,"ranked","-1"); // learning but NO indexation
-        connector.CONTEXTS_Fetch("-1","1","1");
-        connector.CONTEXTS_Drop("1");
-        connector.executeScript(); // execute script on mARC server side
-        shapes = connector. getDataByName("shapes",1); // the indexation data
-        activities = connector. getDataByName("activity",1); // corresponding activity
-
+        try
+        {
+            connector.directExecute = false; // script mode
+            connector.openScript(null); // script starts after this line
+            connector.SESSION_Store(signal,"ranked","-1"); // learning but NO indexation
+            connector.CONTEXTS_Fetch("-1","1","1");
+            connector.CONTEXTS_Drop("1");
+            connector.executeScript(); // execute script on mARC server side
+            shapes = connector. getDataByName("shapes",1); // the indexation data
+            activities = connector. getDataByName("activity",1); // corresponding activity
+        }
+        catch(Exception e)
+        {
+            if ( connector.result.mError )
+            {
+                System.out.println("mARC error occured : "+connector.getExecutionErrorMsg());
+            }
+        }
     }
 }

@@ -21,8 +21,17 @@ public class CreateAMasterTable {
      */
     static public void doIt(Connector connector, String tableName, String structure)
     {
-        connector. directExecute = true; // line by line mode
-        connector.TABLE_Create(tableName,"NULL","100000","MASTER", structure);
-
+        try
+        {
+            connector. directExecute = true; // line by line mode
+            connector.TABLE_Create(tableName,"NULL","100000","MASTER", structure);
+        }
+        catch(Exception e)
+        {
+            if ( connector.result.mError )
+            {
+                System.out.println("mARC error occured : "+connector.getExecutionErrorMsg());
+            }
+        }
     }
 }
